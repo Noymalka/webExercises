@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scientific Calculator</title>
+  <link rel="stylesheet" href="calculatorStyle.css" />
+</head>
+<body>
+  <div style="text-align: center; font-size: 40px; color:black">
+    Scientific Calculator
+  </div>
+  <div class="cul">
+    <div class="monitor" id="monitor">0</div>
+
+    <div class="firstButtonRow">
+      <div class="smallButton" onclick="deleteDisplay()">MC</div>
+      <div class="smallButton" onclick="memoryRecall()">MR</div>
+      <div class="smallButton" onclick="memoryAdd()">M+</div>
+      <div class="smallButton" onclick="memorySub()">M-</div>
+      <div class="smallButton" onclick="memoryStore()">MS</div>
+      <div class="smallButton" onclick="memoryMultiply()">M*</div>
+    </div>
+
+    <div>
+        <div class="button" onclick="appendCharacter('Math.pow(2,')">2^x</div>
+        <div class="button" onclick="appendCharacter('3.1415926535897932384626433832795')">pai</div>
+        <div class="button" onclick="appendCharacter('2.7182818284590452353602874713527')">e</div>
+        <div class="button" onclick="deleteDisplay()">C</div>
+        <div class="button" onclick="clearMonitor()">del</div>
+    </div>
+
+    <div>
+        <div class="button" onclick="appendCharacter('Math.pow(')">x^2</div>
+        <div class="button" onclick="inverse()">1/x</div>
+        <div class="button" onclick="absolute()">|x|</div>
+        <div class="button" onclick="exponential()">exp</div>
+        <div class="button" onclick="modulo()">mod</div>
+    </div>
+
+    <div>
+        <div class="button" onclick="appendCharacter('Math.sqrt(')">√</div>
+        <div class="button" onclick="appendCharacter('(')">(</div>
+        <div class="button" onclick="appendCharacter(')')">)</div>
+        <div class="button" onclick="factorial()">n!</div>
+        <div class="button" onclick="appendCharacter('/')">/</div>
+    </div>
+    
+    <div>
+        <div class="button" onclick="appendCharacter('Math.pow(')">x^y</div>
+        <div class="button" onclick="appendCharacter('7')">7</div>
+        <div class="button" onclick="appendCharacter('8')">8</div>
+        <div class="button" onclick="appendCharacter('9')">9</div>
+        <div class="button" onclick="appendCharacter('*')">X</div>
+    </div>
+
+    <div>
+        <div class="button" onclick="appendCharacter('Math.pow(10,')">10^x</div>
+        <div class="button" onclick="appendCharacter('4')">4</div>
+        <div class="button" onclick="appendCharacter('5')">5</div>
+        <div class="button" onclick="appendCharacter('6')">6</div>
+        <div class="button" onclick="appendCharacter('-')">-</div>
+    </div>
+    
+    <div>
+        <div class="button" onclick="appendCharacter('Math.log10(')">log</div>
+        <div class="button" onclick="appendCharacter('1')">1</div>
+        <div class="button" onclick="appendCharacter('2')">2</div>
+        <div class="button" onclick="appendCharacter('3')">3</div>
+        <div class="button" onclick="appendCharacter('+')">+</div>
+    </div>
+    
+    <div>
+        <div class="button" onclick="appendCharacter('Math.ln(')">ln</div>
+        <div class="button" onclick="changeSign()">+/-</div>
+        <div class="button" onclick="appendCharacter('0')">0</div>
+        <div class="button" onclick="appendCharacter('.')">.</div>
+        <div class="button" onclick="calculateResult()">=</div>
+    </div>
+    
+  </div>
+
+    <!-- special scripts for integration in MTW gallery - must be placed at the bottom of the HTML after your code -->
+    <script>
+        let expression = '';
+    let memory = 0;
+
+    function appendCharacter(char) {
+      expression += char;
+      document.getElementById('monitor').innerText = expression;
+    }
+
+    function deleteDisplay() {
+      expression = '';
+      document.getElementById('monitor').innerText = '0';
+    }
+
+    function clearMonitor() {
+      expression = '';
+      document.getElementById('monitor').innerText = '0';
+      document.getElementById('result').innerText = '=';
+    }
+
+    function calculateResult() {
+        try {
+            if (expression !== '') {
+                const result = eval(expression);
+                document.getElementById('monitor').innerText = `${result}`;
+                expression = ''; // Clear expression after displaying the result
+                
+            }
+        } catch (error) {
+        document.getElementById('monitor').innerText = '= Error';
+        expression = '';
+        }
+  }
+
+    function memoryRecall() {
+      expression += memory;
+      document.getElementById('monitor').innerText = expression;
+    }
+
+    function memoryAdd() {
+      memory += eval(expression);
+      clearMonitor();
+    }
+
+    function memorySub() {
+      memory -= eval(expression);
+      clearMonitor();
+    }
+
+    function memoryStore() {
+      memory = eval(expression);
+      clearMonitor();
+    }
+
+    function memoryMultiply() {
+      memory *= eval(expression);
+      clearMonitor();
+    }
+
+    function changeSign() {
+        try {
+        const currentValue = eval(expression);
+        const result = -currentValue;
+        document.getElementById('monitor').innerText = result;
+        expression = result.toString();
+        } catch (error) {
+        document.getElementById('monitor').innerText = 'Error';
+        }
+    }
+    function inverse() {
+        try {
+          const currentValue = eval(expression);
+          const result = 1 / currentValue;
+          document.getElementById('monitor').innerText = result;
+          expression = result.toString();
+        } catch (error) {
+          document.getElementById('monitor').innerText = 'Error';
+        }
+      }
+
+      function absolute() {
+        try {
+          const currentValue = eval(expression);
+          const result = Math.abs(currentValue);
+          document.getElementById('monitor').innerText = result;
+          expression = result.toString();
+        } catch (error) {
+          document.getElementById('monitor').innerText = 'Error';
+        }
+      }
+
+      function exponential() {
+        try {
+          const currentValue = eval(expression);
+          const result = Math.exp(currentValue);
+          document.getElementById('monitor').innerText = result;
+          expression = result.toString();
+        } catch (error) {
+          document.getElementById('monitor').innerText = 'Error';
+        }
+      }
+
+      function modulo() {
+        try {
+          const currentValue = eval(expression);
+          const result = currentValue % 1;
+          document.getElementById('monitor').innerText = result;
+          expression = result.toString();
+        } catch (error) {
+          document.getElementById('monitor').innerText = 'Error';
+        }
+      }
+
+      function factorial() {
+            try {
+            const currentValue = eval(expression);
+            if (Number.isInteger(currentValue) && currentValue >= 0) {
+                let result = 1;
+                for (let i = 2; i <= currentValue; i++) {
+                result *= i;
+                }
+                document.getElementById('monitor').innerText = result;
+                expression = result.toString();
+            } else {
+                document.getElementById('monitor').innerText = 'Error';
+            }
+            } catch (error) {
+            document.getElementById('monitor').innerText = 'Error';
+            }
+        }
+    </script>
+    
+  </body>
+</html>

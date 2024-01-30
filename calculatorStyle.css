@@ -1,0 +1,58 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cul {
+  width: 300px; /* Adjusted width for the border */
+  height: 360px;
+  margin: 40px auto;
+  background-color: rgb(255, 199, 207);
+  padding: 15px;
+  border: 2px solid black; /* Border added */
+  border-radius: 10px; /* Rounded corners for a softer look */
+}
+
+.firstButtonRow {
+  overflow: hidden;
+}
+
+.smallButton {
+  float: left;
+  width: 40px;
+  margin: 5px;
+  background-color: pink;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.smallButton:hover {
+  background-color: gray;
+  color: white;
+}
+
+.button {
+  float: left;
+  width: 50px;
+  margin: 5px;
+  background-color: pink;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: gray;
+  color: white;
+}
+
+.monitor {
+  background-color: white;
+  width: 270px; /* Adjusted width for the border */
+  padding: 10px;
+  color: black;
+  margin: 5px;
+  border-radius: 4px;
+}
